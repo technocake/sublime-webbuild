@@ -1,3 +1,4 @@
 {
-	"cmd": ["python", "/Users/technocake/code/web-build/web-build.py", "$file"]
+	"cmd": ["python", "$packages/sublime-webbuild/web-build.py", "$file"],
+	"selector" : ["source.html", "source.css", "source.js"]
 }
