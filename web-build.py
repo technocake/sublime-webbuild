@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 #coding: utf-8
 import sys, re, os, string, webbrowser, subprocess
-
+###
+###
 ###		Web-build
 ###		Current version rsyncs a given folder localy with a given folder
 ###		On a remote host:  (LOCAL_DIR -->  REMOTE_HOST_URI).
@@ -11,6 +12,7 @@ import sys, re, os, string, webbrowser, subprocess
 ###		When the sync is done, it opens a webbrowser to a given target url:
 ###		(REMOTE_WEB_URI).
 ###
+###		@Author:	Technocake http://technocake.net
 ############################################################################
 
 REMOTE_HOST_URI = "technocake@marte.komsys.org:/var/www/boofrecords.no/"
