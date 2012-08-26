@@ -3,30 +3,41 @@
 import sys, re, os, string, webbrowser, subprocess
 ###
 ###
-###		Web-build
-###		Current version rsyncs a given folder localy with a given folder
-###		On a remote host:  (LOCAL_DIR -->  REMOTE_HOST_URI).
-###				
-###		It does not care for the file being given to it on build.
+###        Web-build
+###        Current version rsyncs a given folder localy with a given folder
+###        On a remote host:  (LOCAL_DIR -->  REMOTE_HOST_URI).
 ###
-###		When the sync is done, it opens a webbrowser to a given target url:
-###		(REMOTE_WEB_URI).
+###        It does not care for the file being given to it on build.
 ###
-###		@Author:	Technocake http://technocake.net
+###        When the sync is done, it opens a webbrowser to a given target url:
+###        (REMOTE_WEB_URI).
+###
+###        @Author:    Technocake http://technocake.net
 ############################################################################
 
-REMOTE_HOST_URI = "technocake@marte.komsys.org:/var/www/boofrecords.no/"
-REMOTE_WEB_URI = "http://boof.technocake.net/"
-LOCAL_DIR = "/Users/technocake/boof/web/"
 
-#Empty Skeleton, don't mind this block.
-try:
-	pass
-except Exception as e:	print (""" Usage: web-build <file> """, e);	sys.exit(1)
+config = 'undefined'
 
 
-#Copy to remote host (Rsync)
-print subprocess.call("rsync -vaz %s %s" % (LOCAL_DIR,  REMOTE_HOST_URI), shell=True)
+def find_config():
+    """ Searches for a config.wb.py file in the given sublimeproject directory """
+    #Adding the project dir to path
+    sys.path.append(sys.argv[1])
+    config = __import__('config-wb', fromlist=[]).config()
+    global config
 
-#Browse result
-webbrowser.open(REMOTE_WEB_URI)
+
+def build():
+    """ Builds the webproject """
+    global config
+
+    #Copy to remote host (Rsync)
+    print subprocess.call("rsync -vaz %s %s" % (config.LOCAL_DIR,  config.REMOTE_HOST_URI), shell=True)
+
+    #Browse result
+    webbrowser.open(config.REMOTE_WEB_URI)
+
+
+if __name__ == '__main__':
+    find_config()
+    build()
