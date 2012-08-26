@@ -13,7 +13,7 @@
 #Example config file:
 # filename: config-wb.py  !important
 
-class config:
-    REMOTE_HOST_URI = "technocake@marte.komsys.org:/srv/webmap/"
-    REMOTE_WEB_URI = "http://webmap.technocake.net/lol"
-    LOCAL_DIR = "/Users/technocake/django/webmap/"
+>>class config:
+>>  REMOTE_HOST_URI = "technocake@marte.komsys.org:/srv/webmap/"
+>>  REMOTE_WEB_URI = "http://webmap.technocake.net/lol"
+>>  LOCAL_DIR = "/Users/technocake/django/webmap/"
