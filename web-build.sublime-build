@@ -1,9 +1,9 @@
-{	/* 
+{	/*
 
-	docs: http://docs.sublimetext.info/en/latest/reference/build_systems.html 
+	docs: http://docs.sublimetext.info/en/latest/reference/build_systems.html
 
 	*/
-	"cmd": ["python", "$packages/User/sublime-webbuild/web-build.py", "$file"],
+	"cmd": ["python", "$packages/User/sublime-webbuild/web-build.py", "$folder", "$file"],
 	"selector" : ["source.html", "source.css", "source.js"]
 
 }
