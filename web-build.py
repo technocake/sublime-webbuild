@@ -23,6 +23,7 @@ def find_config():
     """ Searches for a config.wb.py file in the given sublimeproject directory """
     #Adding the project dir to path
     sys.path.append(sys.argv[1])
+    print sys.argv[1]
     config = __import__('config-wb', fromlist=[]).config()
     global config
 
@@ -32,7 +33,7 @@ def build():
     global config
 
     #Copy to remote host (Rsync)
-    print subprocess.call("rsync -vaz %s %s" % (config.LOCAL_DIR,  config.REMOTE_HOST_URI), shell=True)
+    print subprocess.call("rsync -vaz %s %s --exclude %s" % (config.LOCAL_DIR,  config.REMOTE_HOST_URI, '*.pyc'), shell=True)
 
     #Browse result
     webbrowser.open(config.REMOTE_WEB_URI)
