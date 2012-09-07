@@ -33,6 +33,7 @@ def build():
     global config
 
     #Copy to remote host (Rsync)
+    
     print subprocess.call("rsync -vaz --exclude %s %s %s " % ('*.pyc', config.LOCAL_DIR,  config.REMOTE_HOST_URI, ), shell=True)
 
     #Browse result
