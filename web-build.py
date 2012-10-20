@@ -22,22 +22,35 @@ config = 'undefined'
 def find_config():
     """ Searches for a config.wb.py file in the given sublimeproject directory """
     #Adding the project dir to path
-    sys.path.append(sys.argv[1])
-    print sys.argv[1]
-    config = __import__('config-wb', fromlist=[]).config()
     global config
+
+    sys.path.append(sys.argv[1])
+    print ("Building : %s" % sys.argv[1] )
+    config = __import__('config-wb', fromlist=[]).config()
 
 
 def build():
     """ Builds the webproject """
     global config
 
-    #Copy to remote host (Rsync)
-    
-    print subprocess.call("rsync -vaz --exclude %s %s %s " % ('*.pyc', config.LOCAL_DIR,  config.REMOTE_HOST_URI, ), shell=True)
 
-    #Browse result
+    ############################################################
+    # Copy to remote host (Rsync)
+    # 
+    if not 'NO_SYNC' in dir(config):
+        print subprocess.call( 
+            "rsync -vaz --exclude %s %s %s " % ('*.pyc', config.LOCAL_DIR,  config.REMOTE_HOST_URI, ), 
+            shell=True 
+        ) 
+    else:
+        print "Not syncing config.NO_SYNC flag is set"
+
+
+    ############################################################
+    # Browse result
+    # 
     webbrowser.open(config.REMOTE_WEB_URI)
+
 
 
 if __name__ == '__main__':
